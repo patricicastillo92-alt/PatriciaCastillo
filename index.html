@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zona VIP Patricia Castillo</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: linear-gradient(180deg, #0a0a0a, #1a1a1a);
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+    }
+    h1 {
+        color: gold;
+        margin-bottom: 15px;
+        font-size: 2em;
+        text-shadow: 0 0 15px rgba(255,215,0,0.7);
+    }
+    p {
+        max-width: 700px;
+        margin: auto;
+        line-height: 1.6;
+        font-size: 1.05em;
+        color: #ddd;
+    }
+    .btc {
+        background: #181818;
+        padding: 12px;
+        border-radius: 10px;
+        margin: 20px auto;
+        font-weight: bold;
+        word-break: break-all;
+        border: 1px solid rgba(255,215,0,0.3);
+        box-shadow: 0 0 15px rgba(255,215,0,0.1);
+        width: fit-content;
+    }
+    .btc code {
+        color: gold;
+        font-size: 1.1em;
+    }
+    form {
+        background: #181818;
+        padding: 25px;
+        border-radius: 12px;
+        max-width: 420px;
+        margin: 30px auto;
+        text-align: left;
+        box-shadow: 0 0 20px rgba(0,0,0,0.6);
+        border: 1px solid rgba(255,215,0,0.15);
+    }
+    label {
+        display: block;
+        margin-top: 12px;
+        font-weight: bold;
+        color: #f5f5f5;
+    }
+    input, button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 6px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1em;
+    }
+    input[type="text"], input[type="email"], input[type="file"] {
+        background: #2a2a2a;
+        color: #fff;
+    }
+    button {
+        background: linear-gradient(90deg, gold, orange);
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 1.1em;
+        transition: 0.3s;
+    }
+    button:hover {
+        background: linear-gradient(90deg, orange, gold);
+        box-shadow: 0 0 15px rgba(255,165,0,0.8);
+    }
+    small {
+        display: block;
+        margin-top: 10px;
+        font-size: 0.9em;
+        color: #bbb;
+        text-align: center;
+    }
+    .success-message {
+        background: #222;
+        color: #0f0;
+        padding: 30px;
+        border-radius: 12px;
+        max-width: 500px;
+        margin: 30px auto;
+        font-size: 1.2em;
+        box-shadow: 0 0 15px rgba(0,255,0,0.4);
+        border: 1px solid rgba(0,255,0,0.2);
+    }
+</style>
+</head>
+<body>
+
+<h1>Bienvenido al VIP de Patricia Castillo</h1>
+<p>
+Zona de acceso exclusivo VIP.  
+La membresía tiene un costo único de <strong>300 USD</strong> pagados en Bitcoin.  
+La suscripción se renueva cada 2 meses.  
+También puedes invitarme a un café y, si me agrada, podrías recibir un regalito especial.
+</p>
+
+<div class="btc">
+Dirección BTC: <br>
+<code>bc1q02t2yh68lmqhq3dua407gnm50ulq43pwwa5dxx</code>
+</div>
+
+<p>
+<strong>Contenido VIP:</strong>  
+Más de 500 videos en FHD  
+Secciones en vivo  
+Canales exclusivos  
+Nuevo contenido semanal  
+Acceso directo y niveles extra para miembros avanzados.  
+<br><br>
+Tras realizar el pago, adjunta tu comprobante y completa el formulario.
+</p>
+
+<form id="vipForm">
+    <label>Nombre o Apodo:</label>
+    <input type="text" name="nombre" required>
+
+    <label>Correo electrónico:</label>
+    <input type="email" name="correo" required>
+
+    <label>Comprobante de pago:</label>
+    <input type="file" name="comprobante" accept=".png,.jpg,.jpeg,.gif,.pdf" required>
+
+    <button type="submit">Enviar Solicitud VIP</button>
+
+    <small>Recibirás los datos de acceso al VIP en tu correo tras validar el pago.</small>
+</form>
+
+<script>
+document.getElementById('vipForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevenir envío real
+
+    const nombre = this.nombre.value.trim();
+    const correo = this.correo.value.trim();
+    const archivo = this.comprobante.files[0];
+
+    // Validar correo con regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(correo)) {
+        alert("Por favor ingresa un correo válido.");
+        return;
+    }
+
+    // Validar archivo
+    if (!archivo) {
+        alert("Por favor adjunta un comprobante de pago.");
+        return;
+    }
+    const validExtensions = ['image/png','image/jpg','image/jpeg','image/gif','application/pdf'];
+    if (!validExtensions.includes(archivo.type)) {
+        alert("El archivo debe ser imagen (.png, .jpg, .jpeg, .gif) o PDF.");
+        return;
+    }
+
+    // Si todo está correcto, mostrar mensaje de éxito
+    this.style.display = 'none';
+    const successMsg = document.createElement('div');
+    successMsg.className = 'success-message';
+    successMsg.innerHTML = `
+        ¡Solicitud enviada con éxito!<br><br>
+        Gracias ${nombre} por registrarte al VIP. Te contactaremos pronto.
+    `;
+    document.body.appendChild(successMsg);
+});
+</script>
+
+</body>
+</html>
